@@ -1,0 +1,51 @@
+TRYING DJANGO BEST PRACTICE : https://blog.yusufberki.net/best-practice-django-structure-part-1-81db5b6724bc
+
+yang pertama dibikin adalah django-admin core
+
+untuk merapihkan apps, buat folder apps, berikan __init__ lalu tambahkan folder apps
+
+setelah itu bisa dibuat startapp <nama_app> apps/<nama_app_folder>
+
+saat installed apps masukan apps.<nama_app>
+
+ganti config di apps.py menjadi apps.<nama_app>
+
+----------------------
+
+pada <nama_app> lebih baik dipisah api dan pages folder (.py) dan masing masing diberikan
+1. __init__
+2. urls
+3. views
+
+masing masing punya views masing masing 
+
+-------------
+
+pada core buat lagi satu folder settings
+
+pindahkan file setting yang ada di core ke dalam base.py di folder setting
+
+isinya
+
+1.base
+2.development
+3. production
+
+dengan rule sbb:
+1. pada saat development DEBUG = ON, pada saat production DEBUG = OFF
+2. pada saat development connect LOCAL DB, pada saat production connect MASTER DB
+3. pada saat development publish STATIC FILE, pada saat production NGINX
+
+base akan melakukan setting umum
+
+karena settingan di manage.py diganti maka ganti
+
+# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
+
+menjadi 
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings.development')
+
+karena dia masuk kedalam filder dan file development
+
+=============== v1 structrure version =========================
